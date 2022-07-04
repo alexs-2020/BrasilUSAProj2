@@ -32,3 +32,7 @@ app.use("/", index);
 require("./error-handling")(app);
 
 module.exports = app;
+const index = require("./routes/index");
+app.use("/", index);
+
+require("./error-handling")(app);
