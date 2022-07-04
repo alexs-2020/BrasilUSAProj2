@@ -1,10 +1,18 @@
 const router = require("express").Router();
 
 /* GET home page */
+const Location = require('../models/Location')
 
-const location = require('../models/Location')
+router.post('/addLocation', (req, res) => {
+  Location.create(req.body)
+      .then(() => {
+        console.log('wewe')
+        res.redirect('/')})
+      .catch(error => console.log(error));
+});
+
 router.get("/", (req, res, next) => {
-  location.find()
+  Location.find()
   .then((locationFromDB) => {
     res.render("index", { locationList: locationFromDB });
   })
@@ -12,4 +20,9 @@ router.get("/", (req, res, next) => {
       next(err)
   })
 })
+router.get("/add", (req, res, next) => {
+  res.render('add')
+})
+
+
 module.exports = router;
