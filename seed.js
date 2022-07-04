@@ -8,7 +8,7 @@ const Location = require('./models/Location')
 const locals = [
 	{
 		title: 'weiner',
-        img: "public\images\monke.jpg",
+        img: "monke.jpg",
         location: "joao mom house - torres rs"
     	},
 ]

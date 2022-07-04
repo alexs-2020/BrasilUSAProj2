@@ -1,8 +1,15 @@
 const router = require("express").Router();
 
 /* GET home page */
-router.get("/", (req, res, next) => {
-  res.render("index");
-});
 
+const location = require('../models/Location')
+router.get("/", (req, res, next) => {
+  location.find()
+  .then((locationFromDB) => {
+    res.render("index", { locationList: locationFromDB });
+  })
+  .catch((err) => {
+      next(err)
+  })
+})
 module.exports = router;
