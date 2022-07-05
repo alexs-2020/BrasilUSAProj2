@@ -1,6 +1,5 @@
 const router = require("express").Router();
 
-/* GET home page */
 const Location = require('../models/Location')
 
 router.post('/addLocation', (req, res) => {
@@ -24,5 +23,14 @@ router.get("/add", (req, res, next) => {
   res.render('add')
 })
 
+router.post('/locations/:locationId/delete', (req, res, next) => {
+  const { locationId } = req.params;
+ 
+  Location.findByIdAndDelete(locationId)
+    .then(() => res.redirect('/'))
+    .catch(error => next(error));
+});
 
-module.exports = router;
+module.exports = router; 
+
+
