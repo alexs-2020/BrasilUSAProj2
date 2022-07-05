@@ -1,12 +1,24 @@
+* {
+
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+
+}
+
+html, body {
+
+  height:100%;
+  width:100%;
+
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
 
-a {
-  color: #00b7ff;
-}
+  align-content:space-around;
+  background-color:#a4a4a4;
+  color:rgb(0, 110, 255);
+  display:grid;
+  justify-content:center;
 
-h1 {
-  color: 15px;
 }
