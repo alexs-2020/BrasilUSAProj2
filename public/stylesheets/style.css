@@ -1,23 +1,172 @@
-ul {
-  list-style-type:none;
-  margin: 0;
-  padding: 0;
-  background-color: red;
-  text-decoration: solid;
-}
-.marker {
-  background-image: url('../images/mapbox-icon.png');
-  background-size: cover;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-.mapboxgl-popup {
-  max-width: 200px;
+* {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
-.mapboxgl-popup-content {
+a {
+  text-decoration: none;
+  color: white;
+}
+
+button {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 5px;
+  width: 100px;
+  font-family: 'Bebas Neue', cursive;
+}
+
+.home-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.home-btn-container button {
+  margin: 20px;
+  font-size: 1.5rem;
+  width: 200px;
+}
+
+button:hover{
+  background-color: rgba(189, 8, 8, 0.766);
+  cursor: pointer;
+  transition: .2s;
+}
+
+html, body {
+  height:70%;
+  width:100%;
+}
+
+body {
+  color:rgb(0, 0, 0);
+  font-family: 'Bebas Neue', cursive;
+  background-color: white;
+}
+
+input {
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: none;
+  border: 2px solid black;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  margin: 20px;
+  justify-content: center;
+}
+
+div#form {
+  height: 100vh;
   text-align: center;
-  font-family: 'Open Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url('/images/SingUpBackground.png');
+}
+
+
+.map-container {
+  width: 46vw;
+}
+.boxImg{
+  width: 45vh;
+}
+.images-container img {
+  width: 300px;
+  height: 150px !important;
+ 
+}
+
+ul {
+  display: flex;
+  height: 30px;
+  align-items: center;
+  padding-left: 10px;
+}
+
+li {
+  list-style-type: none;
+  margin-right: 20px;
+}
+
+nav {
+  width: 100%;
+  background: rgb(241, 65, 65);
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.home {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+  background: #f8f8f8;
+}
+
+.home-marquee {
+  height: 20vh;
+}
+
+marquee h1 {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.logo{
+  width: 300px;
+}
+
+.imgs-div {
+  margin-top: 29px;
+  margin-left: 20px;
+}
+
+.imgs-container {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: scroll;
+  height: 80vh;
+  background-color: rgb(207, 207, 207);
+  width: 53vw;
+  margin-top: 10vh;
+}
+
+.map-container-head {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+  margin-left: 10px;
+}
+
+#map {
+  width: 45vw; 
+  height: 80vh;
+  margin-left: 10px;
+}
+
+
+
+#title {
+  width: 100vw;
+  background-color: aqua;
+}
+
+#prominent-btn {
+  background-color: rgb(115, 239, 113);
+  width: fit-content;
+  margin: 10px;
+  padding: 10px;
+  color: black;
 }
