@@ -6,7 +6,6 @@ const Location = require('../models/Location')
 router.post('/addLocation', (req, res) => {
   Location.create(req.body)
       .then(() => {
-        console.log('wewe')
         res.redirect('/map')})
       .catch(error => console.log(error));
 });
@@ -14,9 +13,17 @@ router.post('/addLocation', (req, res) => {
 router.get("/", (req, res, next) => {
   res.render('index')
 })
-router.get("/add", (req, res, next) => {
-  res.render('add')
+
+
+
+router.get('/locations', (req,res) =>{
+  Location.find()
+  .then((locationFromDB) => {
+    res.json({ locationList: locationFromDB })
+  })
+  .catch(error => console.log(error));
 })
+
 
 router.get('/map', (req,res)=> 
   Location.find()

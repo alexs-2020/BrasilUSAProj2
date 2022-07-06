@@ -5,7 +5,10 @@ const locationSchema = new Schema(
   {
     title: String,
     img: String,
-    location: String
+    location:{
+      long: Number,  
+      lat: Number
+    }
   });
 
 const Location = model("Location", locationSchema);
