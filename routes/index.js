@@ -2,6 +2,10 @@ const router = require("express").Router();
 
 /* GET home page */
 const Location = require('../models/Location')
+const bcryptjs = require('bcryptjs');
+const saltRounds = 10;
+const User = require('../models/User.model')
+const { isLoggedIn, isLoggedOut } = require('../middleware/route-guard.js');
 
 router.post('/addLocation', (req, res) => {
   Location.create(req.body)
@@ -25,7 +29,7 @@ router.get('/locations', (req,res) =>{
 })
 
 
-router.get('/map', (req,res)=> 
+router.get('/map', isLoggedIn, (req,res)=> 
   Location.find()
   .then((locationFromDB) => {
     res.render("map", { locationList: locationFromDB });
@@ -36,12 +40,9 @@ router.get('/map', (req,res)=>
   )
 
 //auth
-const bcryptjs = require('bcryptjs');
-const saltRounds = 10;
-const User = require('../models/User.model')
 
 //auth routes
-router.get('/signup', (req, res)=>{
+router.get('/signup', isLoggedOut, (req, res)=>{
   res.render('auth/signup')
 })
 
@@ -68,25 +69,22 @@ router.get('/login', (req, res) => res.render('auth/login'));
 
 router.post('/login', (req, res, next) => {
   const { username, password } = req.body;
+  console.log('SESSION =====> ', req.session);
   if (username === '' || password === '') {
     res.render('auth/login', {
       errorMessage: 'Please enter both, username and password to login.'
     });
     return;
   }
- console.log(req.body)
- 
   User.findOne({ username })
     .then(user => {
-      console.log(username)
-      console.log(password)
-        console.log(user.password)
       if (!user) {
         res.render('auth/login', { errorMessage: 'User is not registered.' });
         return;
       } else if (bcryptjs.compareSync(password, user.password)) {
-        
-        res.render('map');
+        req.session.currentUser = user;
+        res.render('userProfile', { user });
+        // res.render('map');
       } else {
         res.render('auth/login', { errorMessage: 'Incorrect password.' });
       }
@@ -94,6 +92,22 @@ router.post('/login', (req, res, next) => {
     .catch(error => next(error));
 });
 
+router.get('/userProfile', (req,res)=>{
+  let username = req.session.currentUser.username
+  console.log(req.session.currentUser)
+  User.findOne({username})
+  .then(user =>{ 
+    res.render('userProfile', { user });
+  })
+})
+
+
+router.post('/logout', (req, res, next) => {
+  req.session.destroy(err => {
+    if (err) next(err);
+    res.redirect('/');
+  })
+});
 
 
 router.post('/locations/:locationId/delete', (req, res, next) => {

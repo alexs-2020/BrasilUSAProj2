@@ -14,7 +14,7 @@ const express = require("express");
 const hbs = require("hbs");
 
 const app = express();
-
+require('./config/session.config')(app);
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
 require("./config")(app);
 
@@ -30,5 +30,19 @@ app.use("/", index);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
+
+// app.js
+// ... all imports stay unchanged
+
+
+//     |-----------------------------|
+// use session here:                 V
+
+//                                  ^
+//                                  |
+// the "app" that gets passed here is the
+// previously defined Express app (const app = express();)
+
+// ... the rest of this file stays unchanged
 
 module.exports = app;
