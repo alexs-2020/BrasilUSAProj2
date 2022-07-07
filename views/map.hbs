@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- these are the links for mapbox -->
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js'></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css' type='text/css' />
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<title>Spot Map</title>
+</head>
+<body >
+    <div style="display:flex;">
+    <div class="map-container">
+        <div class="map-container-head" >
+             <h2 id="#title">List of Locations</h2>
+        </div>
+        <div id="map"></div>
+        <form action="/addLocation" method="POST">
+            <input type="text" name="title"  placeholder="Spot Name">
+            <input type="text" name="img"  placeholder="Image URL">
+            <input type="text" name="city"  placeholder="Closest City">
+            <input type="hidden" step="0.0000000000000001" name="location.long" id="long">
+            <input type="hidden" step="0.0000000000000001" name="location.lat" id="lat">
+            <button type="submit">Create Spot</button>
+	    </form>
+    </div>
+    <div class="imgs-container">
+      {{#each locationList}}
+        <div class="imgs-div">
+          <img src="{{img}}" class="boxImg" alt="monke"/>
+          <h1>{{title}}</h1>
+          <h2>{{city}}</h2>
+          <form action="/locations/{{_id}}/delete" method="POST">
+            <button type="submit">delete</button>
+          </form>
+        </div>
+      {{/each}}
+    </div>
+    </div>
+    <script src="/map.js"></script>
+</body>
+</html>
