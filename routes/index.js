@@ -63,6 +63,39 @@ router.post('/signup', (req,res,next)=>{
     .catch(error => next(error));
 });
 
+
+router.get('/login', (req, res) => res.render('auth/login'));
+
+router.post('/login', (req, res, next) => {
+  const { username, password } = req.body;
+  if (username === '' || password === '') {
+    res.render('auth/login', {
+      errorMessage: 'Please enter both, username and password to login.'
+    });
+    return;
+  }
+ console.log(req.body)
+ 
+  User.findOne({ username })
+    .then(user => {
+      console.log(username)
+      console.log(password)
+        console.log(user.password)
+      if (!user) {
+        res.render('auth/login', { errorMessage: 'User is not registered.' });
+        return;
+      } else if (bcryptjs.compareSync(password, user.password)) {
+        
+        res.render('map');
+      } else {
+        res.render('auth/login', { errorMessage: 'Incorrect password.' });
+      }
+    })
+    .catch(error => next(error));
+});
+
+
+
 router.post('/locations/:locationId/delete', (req, res, next) => {
   const { locationId } = req.params;
 

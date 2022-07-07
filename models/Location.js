@@ -5,6 +5,7 @@ const locationSchema = new Schema(
   {
     title: String,
     img: String,
+    city: String,
     location:{
       long: Number,  
       lat: Number

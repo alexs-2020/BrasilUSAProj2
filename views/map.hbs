@@ -13,33 +13,35 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<title>Spot Map</title>
 </head>
-<body>
+<body >
+    <div style="display:flex;">
     <div class="map-container">
         <div class="map-container-head" >
              <h2 id="#title">List of Locations</h2>
         </div>
         <div id="map"></div>
         <form action="/addLocation" method="POST">
-		<input type="text" name="title"  placeholder="Spot Name">
-		<input type="text" name="img"  placeholder="Image URL">
-		<input type="number" step="0.0000000000000001" name="location.long" id="long">
-        <input type="number" step="0.0000000000000001" name="location.lat" id="lat">
-		<button type="submit">Create Spot</button>
-	</form>
+            <input type="text" name="title"  placeholder="Spot Name">
+            <input type="text" name="img"  placeholder="Image URL">
+            <input type="text" name="city"  placeholder="Closest City">
+            <input type="hidden" step="0.0000000000000001" name="location.long" id="long">
+            <input type="hidden" step="0.0000000000000001" name="location.lat" id="lat">
+            <button type="submit">Create Spot</button>
+	    </form>
     </div>
     <div class="imgs-container">
       {{#each locationList}}
         <div class="imgs-div">
           <img src="{{img}}" class="boxImg" alt="monke"/>
           <h1>{{title}}</h1>
-          <h2>{{location}}</h2>
+          <h2>{{city}}</h2>
           <form action="/locations/{{_id}}/delete" method="POST">
             <button type="submit">delete</button>
           </form>
         </div>
       {{/each}}
     </div>
-    
+    </div>
     <script src="/map.js"></script>
 </body>
 </html>
